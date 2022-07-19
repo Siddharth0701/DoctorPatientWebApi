@@ -30,10 +30,13 @@ namespace DoctorPatientWebApi
             services.AddDbContext<DemoContext>();
             services.AddCors(options =>
             {
-                options.AddDefaultPolicy(policy => { 
-                po
+                options.AddDefaultPolicy(policy => {
+                    policy.AllowAnyHeader();
+                    policy.AllowAnyMethod();
+                    policy.AllowAnyOrigin();
                 });
             });
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,11 +52,15 @@ namespace DoctorPatientWebApi
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseCors();
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+            
         }
     }
 }

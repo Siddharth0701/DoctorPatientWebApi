@@ -9,7 +9,11 @@ namespace DoctorPatient.Data
 {
    public  class SkillsRepository
     {
-        DemoContext context = new DemoContext();
+        DemoContext context = null;
+        public SkillsRepository( DemoContext context)
+        {
+            this.context = context;
+        }
 
         public IEnumerable<Skill> GetAllSkills()
         {

@@ -24,6 +24,7 @@ namespace DoctorPatientWebApi.Controllers
         [HttpGet]
         public IEnumerable<Skill> Get()
         {
+            return repository.GetAllSkills();
             //return new string[] { "value1", "value2" };
         }
 
@@ -35,21 +36,26 @@ namespace DoctorPatientWebApi.Controllers
         }
 
         // POST api/<SkillsController>
+        //[Route("api/Skills")]
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] Skill value)
         {
+            repository.AddSkills(value);
+            return Ok();
         }
 
         // PUT api/<SkillsController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut()]
+        public void Put([FromBody] Skill value)
         {
+            repository.UpdateSkills(value);
         }
 
         // DELETE api/<SkillsController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            repository.DeleteSkills(id);
         }
     }
 }
